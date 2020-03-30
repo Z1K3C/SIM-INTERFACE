@@ -9,7 +9,7 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko|ZCOOL+QingKe+HuangYou" >
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko|ZCOOL+QingKe+HuangYou|Oswald" >
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
    <link rel="stylesheet" href="./jquery-ui-slider-pips.css">
 
@@ -20,29 +20,30 @@
    <script src="./jquery-ui-slider-pips.js"></script>
 
 </head>
-<body style="background-color:rgb(44,62,80);">
+<body id="mybody" style="background-color:rgb(44,62,80);">
    <section class="container-flow">
       <div class="row mx-0">
+       
+         <div class="col-12 mb-4 " style="background-color:rgb(26, 188, 156);  ">
+            <section class="container-flow " >
+               <div class="row mx-0 align-items-center" style="min-height: 7vh; font-family: Oswald; font-size: 23px;color: rgb(52,73,94)">
+                  <div class="col-5 text-center">
+                        SimMechanics&reg; - Interfaz WEB
+                  </div>
+                  <div class="col-7 text-center">
+                        Control de movimiento para Robot FANUC&reg;
+                  </div>
+               </div>
 
-         
-         <div class="col-12 mb-4" style="background-color:rgb(26, 188, 156); min-height: 7vh">
-
+            </section>
          </div>
-
-         <!-- 
-         <div class="col-12 px-0" style="background-color: transparent; min-height: 10vh">
-            <div class="card mx-4" style="background-color: rgb(52,73,94); height: 100px">
-
-            </div>
-         </div>
-         -->
 
          <div class="col-12 px-0" style="background-color: transparent; min-height: 80vh">
             
             <section class="container-flow">
                <div class="row mx-0 ">
                   <div class="col-lg-6 px-0 pt-4">
-                     <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou; font-size: 34px">
+                     <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou; font-size: 28px">
                         <div class="card-header text-center text-white p-1">CONTROL MANUAL DE LOS EJES</div>
                         
                         <section class="container-flow">
@@ -111,12 +112,40 @@
                            </div>
                         </section>
                         <div class="card-footer text-center text-white p-0" style="height:60px;"> 
-                           <button type="button" class="mt-1 btn btn-outline-light" style=" width: 50%; border-color: rgb(26, 188, 156);">ALGO </button> 
+                           <button id="BOTON_G" type="button" class="mt-1 btn btn-outline-light" style=" width: 50%; border-color: rgb(26, 188, 156);">GUARDAR POSICION </button> 
                         </div>
                      </div>
                   </div>
+
                   <div class="col-lg-6 px-0 pt-4">
-                     <div class="card mx-4" style="background-color: rgb(52,73,94); height: 300px">
+                     <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou;">
+                           <div class="card-header text-center text-white p-1" style="font-size: 28px;">SECUENCIA EN AUTOMATICO</div>                       
+                           <section class="container-flow">
+                              <div class="row mx-0 justify-content-around" >
+                                 <div class="col-lg-12 card p-0 " style="background-color: transparent  ;min-height: 10vh ; border-color: rgb(26, 188, 156);">
+                                   
+                                    <table class="table text-white table-borderless"> 
+                                       <thead>
+                                          <tr style="font-size: 24px;"> 
+                                             <th scope="col">No.</th>
+                                             <th scope="col">Pos J1</th>
+                                             <th scope="col">Pos J2</th>
+                                             <th scope="col">Pos J3</th>
+                                             <th scope="col">Pos J4</th>
+                                             <th scope="col">Pos J5</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody id="TABLE_B">                       
+                                          <!--<tr><th scope="row"> 1 </th><td> Mark </td><td> Otto </td><td> @mdo </td></tr>-->                                         
+                                       </tbody>
+                                    </table>
+
+                                 </div>
+                              </div>
+                           </section>
+                           <div class="card-footer text-center text-white p-0" style="height:60px;"> 
+                              <button id="BOTON_E" type="button" class="mt-1 btn btn-outline-light" style=" width: 50%; border-color: rgb(26, 188, 156);">EJECUTAR SECUENCIA </button> 
+                           </div>
 
                      </div>
                   </div>
@@ -130,163 +159,104 @@
 
    </section>
 
-
 </body>
 
-
 <script>
-var i1 = ["","","","",""];
+var index = 0;
+var indexj = 0;
+var accum = "";
+var matriz = [];
 var i4 = [0,0,0,0,0];
 
 $(document).ready(function(){
 
    $("#SLIDER_J1")
-      .slider({ 
-         min: -150, 
-         max: 150,
-         orientation: "vertical",
-         value: 100
-      }).slider("pips", {
-         rest: "label",
-         step: "25"
-   });
+      .slider({ min: -150, max: 150,orientation: "vertical"})
+      .slider("pips", {rest: "label",step: "25"});
    $("#SLIDER_J2")
-      .slider({ 
-         min: -90, 
-         max: 90,
-         orientation: "vertical"
-      }).slider("pips", {
-         rest: "label",
-         step: "15"
-   });
+      .slider({ min: -90, max: 90,orientation: "vertical"})
+      .slider("pips", {rest: "label",step: "15"});
    $("#SLIDER_J3")
-      .slider({ 
-         min: -70, 
-         max: 70,
-         orientation: "vertical"
-      }).slider("pips", {
-         rest: "label",
-         step: "10"
-   });
+      .slider({ min: -70, max: 70,orientation: "vertical"})
+      .slider("pips", {rest: "label",step: "10"});
    $("#SLIDER_J4")
-      .slider({ 
-         min: -180, 
-         max: 180,
-         orientation: "vertical"
-      }).slider("pips", {
-         rest: "label",
-         step: "30"
-   });
+      .slider({ min: -180, max: 180,orientation: "vertical"})
+      .slider("pips", {rest: "label",step: "30"});
    $("#SLIDER_J5")
-      .slider({ 
-         min: -90, 
-         max: 90,
-         orientation: "vertical"
-      }).slider("pips", {
-         rest: "label",
-         step: "15"
-   });      
+      .slider({ min: -90, max: 90,orientation: "vertical"})
+      .slider("pips", {rest: "label",step: "15"});     
+
+   $.getJSON("./refresh.php").done(function(resp1) {
+      for(var i=0;i<5;i++){
+         i4[i] = resp1[i];
+         $("#NUM_J"+(i+1)).text(i4[i] + "°");
+         $("#SLIDER_J"+(i+1)).slider("value",i4[i]);
+      };  
+   });
    
+   var function1 = function(var1) {
+      i4[(var1-1)] = $("#SLIDER_J"+var1).slider("value");
+      $("#NUM_J"+var1).text(i4[(var1-1)] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   };
 
-   $("#SLIDER_J1").children(".ui-slider-handle").click(function(){
-      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
-      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
-      $("#NUM_J1").text(i4[0] + "°");
-      
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-      console.log($("#SLIDER_J1").slider("value"));
-   });
-   $("#SLIDER_J1").children(".ui-slider-handle").keydown(function(){
-      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
-      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
-      $("#NUM_J1").text(i4[0] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#CARD_J1").click(function(){
-      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
-      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
-      $("#NUM_J1").text(i4[0] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
- 
+   $("#SLIDER_J1").children(".ui-slider-handle").click(function(){function1(1)});
+   $("#SLIDER_J1").children(".ui-slider-handle").keydown(function(){function1(1)});
+   $("#CARD_J1").click(function(){function1(1);});
 
-   $("#SLIDER_J2").children(".ui-slider-handle").click(function(){
-      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
-      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J2").text(i4[1] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#SLIDER_J2").children(".ui-slider-handle").keydown(function(){
-      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
-      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J2").text(i4[1] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#CARD_J2").click(function(){
-      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
-      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J2").text(i4[1] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   $("#SLIDER_J2").children(".ui-slider-handle").click(function(){function1(2);});
+   $("#SLIDER_J2").children(".ui-slider-handle").keydown(function(){function1(2);});
+   $("#CARD_J2").click(function(){function1(2);});
+
+   $("#SLIDER_J3").children(".ui-slider-handle").click(function(){function1(3);});
+   $("#SLIDER_J3").children(".ui-slider-handle").keydown(function(){function1(3);});
+   $("#CARD_J3").click(function(){function1(3);});
+
+   $("#SLIDER_J4").children(".ui-slider-handle").click(function(){function1(4);});
+   $("#SLIDER_J4").children(".ui-slider-handle").keydown(function(){function1(4);});
+   $("#CARD_J4").click(function(){function1(4);});
+
+   $("#SLIDER_J5").children(".ui-slider-handle").click(function(){function1(5);});
+   $("#SLIDER_J5").children(".ui-slider-handle").keydown(function(){function1(5);});
+   $("#CARD_J5").click(function(){function1(5);});
+
+   $("#BOTON_G").click(function(){
+      index++;
+      matriz.push([index,i4[0],i4[1],i4[2],i4[3],i4[4]]);
+      accum = accum + '<tr id="ROW_'+ index +'"class""><th scope="row">' + index + '</th><td>' + matriz[index-1][1] +  '</td><td> ' +  matriz[index-1][2] +  '</td><td> ' +  matriz[index-1][3] +  '</td><td> ' +  matriz[index-1][4]  +  '</td><td> ' +  matriz[index-1][5]  + '</td></tr>';
+      $("#TABLE_B").html(accum);
    });
 
+   var function2 = function(){
+      if(indexj < matriz.length){
+         for(var i=0; i<5;i++){
+         $("#NUM_J"+(i+1)).text(matriz[indexj][i+1] + "°");
+         $("#SLIDER_J"+(i+1)).slider("value",matriz[indexj][i+1]);
+         }
+         $.getJSON('./update.php',{phpj1: matriz[(indexj)][1],phpj2: matriz[indexj][2],phpj3: matriz[indexj][3],phpj4: matriz[indexj][4],phpj5: matriz[indexj][5]});
+         $("#ROW_"+(indexj+1)).addClass('table-active');
+         indexj++;
+      }
+      else{
+         clearInterval(mydelay);
+         indexj = 0;
+         $("#TABLE_B").html(accum);
+      }
+   };
 
-   $("#SLIDER_J3").children(".ui-slider-handle").click(function(){
-      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
-      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
-      $("#NUM_J3").text(i4[2] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#SLIDER_J3").children(".ui-slider-handle").keydown(function(){
-      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
-      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
-      $("#NUM_J3").text(i4[2] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#CARD_J3").click(function(){
-      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
-      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
-      $("#NUM_J3").text(i4[2] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-
-
-   $("#SLIDER_J4").children(".ui-slider-handle").click(function(){
-      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
-      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
-      $("#NUM_J4").text(i4[3] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#SLIDER_J4").children(".ui-slider-handle").keydown(function(){
-      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
-      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
-      $("#NUM_J4").text(i4[3] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#CARD_J4").click(function(){
-      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
-      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
-      $("#NUM_J4").text(i4[3] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-
-
-   $("#SLIDER_J5").children(".ui-slider-handle").click(function(){
-      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
-      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J5").text(i4[4] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#SLIDER_J5").children(".ui-slider-handle").keydown(function(){
-      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
-      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J5").text(i4[4] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-   });
-   $("#CARD_J5").click(function(){
-      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
-      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
-      $("#NUM_J5").text(i4[4] + "°");
-      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   $("#BOTON_E").click(function(){
+      if(matriz.length > 0 ){
+         for(var i=0; i<5;i++){
+         $("#NUM_J"+(i+1)).text(matriz[0][i+1] + "°");
+         $("#SLIDER_J"+(i+1)).slider("value",matriz[0][i+1]);
+         }
+         $.getJSON('./update.php',{phpj1: matriz[0][1],phpj2: matriz[0][2],phpj3: matriz[0][3],phpj4: matriz[0][4],phpj5: matriz[0][5]});
+         indexj++;
+         $("#ROW_"+(indexj+0)).addClass('table-active');
+         mydelay = setInterval(function2, 1000);
+      }
+      else
+         console.log("no listo");
    });
 
 });
