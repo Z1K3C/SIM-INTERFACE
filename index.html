@@ -1,243 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Robot control</title>
-    <!-- Agregaremos todas nuestras CDNs-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Teko|ZCOOL+QingKe+HuangYou" >
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
-    <link rel="stylesheet" href="./jquery-ui-slider-pips.css">
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Robot control</title>
 
-    <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./jquery-ui-slider-pips.js"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Teko|ZCOOL+QingKe+HuangYou" >
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
+   <link rel="stylesheet" href="./jquery-ui-slider-pips.css">
+
+   <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>  
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>       
+   <script src="./jquery-ui-slider-pips.js"></script>
 
 </head>
-<body style="background-color: rgb(44,62,80);">
+<body style="background-color:rgb(44,62,80);">
+   <section class="container-flow">
+      <div class="row mx-0">
 
-  <section class="container-flow">
-    <div class="row mx-0">
+         
+         <div class="col-12 mb-4" style="background-color:rgb(26, 188, 156); min-height: 7vh">
 
-      <div class="col-12 mb-4" style="background-color: rgb(26,188,156)">
+         </div>
 
-        <section class="container-flow">
-          <div class="row mx-0 align-items-center" style="min-height: 7vh; font-family:Oswald ; font-size: 23px; color: rgb(52,73,94) ;">
+         <!-- 
+         <div class="col-12 px-0" style="background-color: transparent; min-height: 10vh">
+            <div class="card mx-4" style="background-color: rgb(52,73,94); height: 100px">
 
-            <div class="col-5 text center"> SimMechanics&reg; - Interfaz WEB </div>
-            <div class="col-7 text center"> Control de movimientos para Robot FANUC&reg; </div>
-            
-          </div>
-        </section>
-      </div>
-      <div class="col-12 px-0" style="background-color: transparent; min-height: 80vh;">
-
-        <section class="container-flow">
-          
-          <div class="row mx-0">
-
-            <div class="col-lg-6 px-0 pt-4">
-              <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou; font-size: 28px;">
-
-                <div class="card-header text-center text-white p-1">CONTROL MANUAL DE LOS EJES</div>
-
-                <section >
-                
-                  <div class="row mx-0 justify-content-around">
-
-                    <div id="CARD_J1" class="col-lg-2 col-4 card p-0" style="background-color: transparent; height:382px; border-color: rgb(26,188,156); ">
-                      <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px;">  EJE J1 </div>
-                      <div class="card-body align-self-center pt-3 pb-0"><div id="SLIDER_J1" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div></div>
-                      <div id="NUM_J1" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px;"> 0&deg;</div>
-                    </div>
-
-                    <div id="CARD_J2" class="col-lg-2 col-4 card p-0" style="background-color: transparent; height:382px; border-color: rgb(26,188,156); ">
-                      <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px;">  EJE J2 </div>
-                      <div class="card-body align-self-center pt-3 pb-0"><div id="SLIDER_J2" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div></div>
-                      <div id="NUM_J2" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px;"> 0&deg;</div>
-                    </div>    
-
-                    <div id="CARD_J3" class="col-lg-2 col-4 card p-0" style="background-color: transparent; height:382px; border-color: rgb(26,188,156); ">
-                      <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px;">  EJE J3 </div>
-                      <div class="card-body align-self-center pt-3 pb-0"><div id="SLIDER_J3" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div></div>
-                      <div id="NUM_J3" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px;"> 0&deg;</div>
-                    </div>
-  
-                    <div id="CARD_J4" class="col-lg-2 col-4 card p-0" style="background-color: transparent; height:382px; border-color: rgb(26,188,156); ">
-                      <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px;">  EJE J4 </div>
-                      <div class="card-body align-self-center pt-3 pb-0"><div id="SLIDER_J4" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div></div>
-                      <div id="NUM_J4" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px;"> 0&deg;</div>
-                    </div>   
-
-                    <div id="CARD_J5" class="col-lg-2 col-4 card p-0" style="background-color: transparent; height:382px; border-color: rgb(26,188,156); ">
-                      <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px;">  EJE J5 </div>
-                      <div class="card-body align-self-center pt-3 pb-0"><div id="SLIDER_J5" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div></div>
-                      <div id="NUM_J5" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px;"> 0&deg;</div>
-                    </div>
- 
-                  </div>
-                
-                
-                </section>
-
-                <div class="card-footer text-center text-white p-0" style="height:60px"> 
-                  <button id="BOTON_G" type="button" class="mt-1 btn btn-outline-light" style="width: 50%;border-color:rgb(26,188,156) ;"> GUARDAR POSICION</button> 
-                </div>
-
-              </div>
             </div>
+         </div>
+         -->
 
-
-            <div class="col-lg-6 px-0 pt-4">
-                <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou;">
-  
-                  <div class="card-header text-center text-white p-1">SECUENCIA EN AUTOMATICO</div>
-  
-                  <section class="container-flow">
-                    <div class="row mx-0 justify-content-around">
-                      <div class="col-lg-12 card p-0" style="background-color: transparent; min-height: 10vh; border-color: rgb(26,188,156);">
-
-                          <table class="table text-white table-borderless"> 
-                              <thead>
-                                 <tr style="font-size: 24px;"> 
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Pos J1</th>
-                                    <th scope="col">Pos J2</th>
-                                    <th scope="col">Pos J3</th>
-                                    <th scope="col">Pos J4</th>
-                                    <th scope="col">Pos J5</th>
-                                 </tr>
-                              </thead>
-                              <tbody id="TABLE_B">                       
-                                 <!--<tr><th scope="row"> 1 </th><td> Mark </td><td> Otto </td><td> @mdo </td></tr>-->                                         
-                              </tbody>
-                           </table>
-
-                      </div>
-
-                    </div>
-                  
-                  
-                  </section>
-  
-                  <div class="card-footer text-center text-white p-0" style="height:60px"> 
-                    <button id="BOTON_E" type="button" class="mt-1 btn btn-outline-light" style="width: 50%;border-color:rgb(26,188,156) ;"> EJECUTAR SECUENCIA</button> 
-                  </div>
-  
-                </div>
-            </div>        
+         <div class="col-12 px-0" style="background-color: transparent; min-height: 80vh">
             
-          </div>
+            <section class="container-flow">
+               <div class="row mx-0 ">
+                  <div class="col-lg-6 px-0 pt-4">
+                     <div class="card mx-4" style="background-color: rgb(52,73,94); font-family: ZCOOL QingKe HuangYou; font-size: 34px">
+                        <div class="card-header text-center text-white p-1">CONTROL MANUAL DE LOS EJES</div>
+                        
+                        <section class="container-flow">
+                           <div class="row mx-0 justify-content-around" >
 
-        </section>
+                              <div id="CARD_J1" class="col-lg-2 col-4 card p-0 " style="background-color: transparent  ;height: 382px; border-color: rgb(26, 188, 156);">
+                                 <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px">
+                                    EJE J1
+                                 </div>
+                                 <div class="card-body align-self-center pt-3 pb-0">
+                                    <div id="SLIDER_J1" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div>
+                                 </div>
+                                 <div id="NUM_J1" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px">
+                                    0&deg;
+                                 </div>
+                              </div>
+
+                              <div id="CARD_J2" class="col-lg-2 col-4 card p-0 " style="background-color: transparent  ;height: 382px; border-color: rgb(26, 188, 156);">
+                                 <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px">
+                                    EJE J2
+                                 </div>
+                                 <div class="card-body align-self-center pt-3 pb-0">
+                                    <div id="SLIDER_J2" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div>
+                                 </div>
+                                 <div id="NUM_J2" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px">
+                                    0&deg;
+                                 </div>
+                              </div>
+
+                              <div id="CARD_J3" class="col-lg-2 col-4 card p-0 " style="background-color: transparent  ;height: 382px; border-color: rgb(26, 188, 156);">
+                                 <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px">
+                                    EJE J3
+                                 </div>
+                                 <div class="card-body align-self-center pt-3 pb-0">
+                                    <div id="SLIDER_J3" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div>
+                                 </div>
+                                 <div id="NUM_J3" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px" >
+                                    0&deg;
+                                 </div>
+                              </div>
+
+                              <div id="CARD_J4" class="col-lg-2 col-4 card p-0 " style="background-color: transparent  ;height: 382px; border-color: rgb(26, 188, 156);">
+                                 <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px">
+                                    EJE J4
+                                 </div>
+                                 <div class="card-body align-self-center pt-3 pb-0">
+                                    <div id="SLIDER_J4" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div>
+                                 </div>
+                                 <div id="NUM_J4" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px">
+                                    0&deg;
+                                 </div>
+                              </div>
+
+                              <div id="CARD_J5" class="col-lg-2 col-4 card p-0 " style="background-color: transparent  ;height: 382px; border-color: rgb(26, 188, 156);">
+                                 <div class="card-header text-white text-center p-1" style="font-family: Teko; font-size: 28px">
+                                    EJE J5
+                                 </div>
+                                 <div class="card-body align-self-center pt-3 pb-0">
+                                    <div id="SLIDER_J5" class="slider mb-0" style="height: 252px; font-family: Teko; font-size: 20px;"></div>
+                                 </div>
+                                 <div id="NUM_J5" class="card-footer text-white text-center p-1" style="font-family: Teko; font-size: 24px">
+                                    0&deg;
+                                 </div>
+                              </div>
+
+                           </div>
+                        </section>
+                        <div class="card-footer text-center text-white p-0" style="height:60px;"> 
+                           <button type="button" class="mt-1 btn btn-outline-light" style=" width: 50%; border-color: rgb(26, 188, 156);">ALGO </button> 
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-lg-6 px-0 pt-4">
+                     <div class="card mx-4" style="background-color: rgb(52,73,94); height: 300px">
+
+                     </div>
+                  </div>
+               </div>
+
+            </section>
+
+         </div>
 
       </div>
 
-    </div>
+   </section>
 
-  </section>
-    
+
 </body>
 
+
 <script>
-  var index = 0;
-  var indexj = 0;
-  var accum = "";
-  var matriz = [];
-  var i4 = [0,0,0,0,0];
+var i1 = ["","","","",""];
+var i4 = [0,0,0,0,0];
+
 $(document).ready(function(){
 
-  $("#SLIDER_J1")
-    .slider({ min: -150, max: 150,orientation: "vertical"})
-    .slider("pips", {rest: "label",step: "25"});
-  $("#SLIDER_J2")
-  .slider({ min: -90, max: 90,orientation: "vertical"})
-  .slider("pips", {rest: "label",step: "15"});
-  $("#SLIDER_J3")
-  .slider({ min: -70, max: 70,orientation: "vertical"})
-  .slider("pips", {rest: "label",step: "10"});
-  $("#SLIDER_J4")
-  .slider({ min: -180, max: 180,orientation: "vertical"})
-  .slider("pips", {rest: "label",step: "30"});
-  $("#SLIDER_J5")
-  .slider({ min: -90, max: 90,orientation: "vertical"})
-  .slider("pips", {rest: "label",step: "15"});
+   $("#SLIDER_J1")
+      .slider({ 
+         min: -150, 
+         max: 150,
+         orientation: "vertical",
+         value: 100
+      }).slider("pips", {
+         rest: "label",
+         step: "25"
+   });
+   $("#SLIDER_J2")
+      .slider({ 
+         min: -90, 
+         max: 90,
+         orientation: "vertical"
+      }).slider("pips", {
+         rest: "label",
+         step: "15"
+   });
+   $("#SLIDER_J3")
+      .slider({ 
+         min: -70, 
+         max: 70,
+         orientation: "vertical"
+      }).slider("pips", {
+         rest: "label",
+         step: "10"
+   });
+   $("#SLIDER_J4")
+      .slider({ 
+         min: -180, 
+         max: 180,
+         orientation: "vertical"
+      }).slider("pips", {
+         rest: "label",
+         step: "30"
+   });
+   $("#SLIDER_J5")
+      .slider({ 
+         min: -90, 
+         max: 90,
+         orientation: "vertical"
+      }).slider("pips", {
+         rest: "label",
+         step: "15"
+   });      
+   
 
-  $.getJSON("./refresh.php").done(function(resp){
-    for(var i=0; i<5; i++){
-      i4[i] = resp[i];
-      $("#NUM_J"+(i+1)).text(i4[i]+"°");
-      $("#SLIDER_J"+(i+1)).slider("value",i4[i]);
-    };
-  });
+   $("#SLIDER_J1").children(".ui-slider-handle").click(function(){
+      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
+      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
+      $("#NUM_J1").text(i4[0] + "°");
+      
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+      console.log($("#SLIDER_J1").slider("value"));
+   });
+   $("#SLIDER_J1").children(".ui-slider-handle").keydown(function(){
+      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
+      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
+      $("#NUM_J1").text(i4[0] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#CARD_J1").click(function(){
+      i1[0] = $("#SLIDER_J1").children(".ui-slider-handle").css("bottom");
+      i4[0] = ((Number(i1[0].slice(0, i1[0].search("px")))-125)*1.2).toFixed(0);
+      $("#NUM_J1").text(i4[0] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+ 
 
-  var function1 = function(var1){
-    i4[(var1-1)] = $("#SLIDER_J"+(var1)).slider("value");
-    $("#NUM_J"+(var1)).text(i4[(var1-1)]+"°");
-    $.getJSON("./update.php",{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
-  };
-
-  $("#SLIDER_J1").children(".ui-slider-handle").click(function(){function1(1)});
-  $("#SLIDER_J1").children(".ui-slider-handle").keydown(function(){function1(1)});
-  $("#CARD_J1").click(function(){function1(1)});
-
-  $("#SLIDER_J2").children(".ui-slider-handle").click(function(){function1(2)});
-  $("#SLIDER_J2").children(".ui-slider-handle").keydown(function(){function1(2)});
-  $("#CARD_J2").click(function(){function1(2)});
-
-  $("#SLIDER_J3").children(".ui-slider-handle").click(function(){function1(3)});
-  $("#SLIDER_J3").children(".ui-slider-handle").keydown(function(){function1(3)});
-  $("#CARD_J3").click(function(){function1(3)});
-
-  $("#SLIDER_J4").children(".ui-slider-handle").click(function(){function1(4)});
-  $("#SLIDER_J4").children(".ui-slider-handle").keydown(function(){function1(4)});
-  $("#CARD_J4").click(function(){function1(4)});
-
-  $("#SLIDER_J5").children(".ui-slider-handle").click(function(){function1(5)});
-  $("#SLIDER_J5").children(".ui-slider-handle").keydown(function(){function1(5)});
-  $("#CARD_J5").click(function(){function1(5)});
-
-  $("#BOTON_G").click(function(){
-      index++;
-      matriz.push([index,i4[0],i4[1],i4[2],i4[3],i4[4]]);
-      accum = accum + '<tr id="ROW_'+ index +'"class""><th scope="row">' + index + '</th><td>' + matriz[index-1][1] +  '</td><td> ' +  matriz[index-1][2] +  '</td><td> ' +  matriz[index-1][3] +  '</td><td> ' +  matriz[index-1][4]  +  '</td><td> ' +  matriz[index-1][5]  + '</td></tr>';
-      $("#TABLE_B").html(accum);
+   $("#SLIDER_J2").children(".ui-slider-handle").click(function(){
+      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
+      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J2").text(i4[1] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#SLIDER_J2").children(".ui-slider-handle").keydown(function(){
+      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
+      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J2").text(i4[1] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#CARD_J2").click(function(){
+      i1[1] = $("#SLIDER_J2").children(".ui-slider-handle").css("bottom");
+      i4[1] = ((Number(i1[1].slice(0, i1[1].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J2").text(i4[1] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
    });
 
-   var function2 = function(){
-      if(indexj < matriz.length){
-         for(var i=0; i<5;i++){
-         $("#NUM_J"+(i+1)).text(matriz[indexj][i+1] + "°");
-         $("#SLIDER_J"+(i+1)).slider("value",matriz[indexj][i+1]);
-         }
-         $.getJSON('./update.php',{phpj1: matriz[(indexj)][1],phpj2: matriz[indexj][2],phpj3: matriz[indexj][3],phpj4: matriz[indexj][4],phpj5: matriz[indexj][5]});
-         $("#ROW_"+(indexj+1)).addClass('table-active');
-         indexj++;
-      }
-      else{
-         clearInterval(mydelay);
-         indexj = 0;
-         $("#TABLE_B").html(accum);
-      }
-   };
 
-   $("#BOTON_E").click(function(){
-      if(matriz.length > 0 ){
-         for(var i=0; i<5;i++){
-         $("#NUM_J"+(i+1)).text(matriz[0][i+1] + "°");
-         $("#SLIDER_J"+(i+1)).slider("value",matriz[0][i+1]);
-         }
-         $.getJSON('./update.php',{phpj1: matriz[0][1],phpj2: matriz[0][2],phpj3: matriz[0][3],phpj4: matriz[0][4],phpj5: matriz[0][5]});
-         indexj++;
-         $("#ROW_"+(indexj+0)).addClass('table-active');
-         mydelay = setInterval(function2, 1000);
-      }
-      else
-         console.log("no listo");
+   $("#SLIDER_J3").children(".ui-slider-handle").click(function(){
+      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
+      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
+      $("#NUM_J3").text(i4[2] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#SLIDER_J3").children(".ui-slider-handle").keydown(function(){
+      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
+      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
+      $("#NUM_J3").text(i4[2] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#CARD_J3").click(function(){
+      i1[2] = $("#SLIDER_J3").children(".ui-slider-handle").css("bottom");
+      i4[2] = ((Number(i1[2].slice(0, i1[2].search("px")))-125)*0.56).toFixed(0);
+      $("#NUM_J3").text(i4[2] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+
+
+   $("#SLIDER_J4").children(".ui-slider-handle").click(function(){
+      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
+      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
+      $("#NUM_J4").text(i4[3] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#SLIDER_J4").children(".ui-slider-handle").keydown(function(){
+      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
+      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
+      $("#NUM_J4").text(i4[3] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#CARD_J4").click(function(){
+      i1[3] = $("#SLIDER_J4").children(".ui-slider-handle").css("bottom");
+      i4[3] = ((Number(i1[3].slice(0, i1[3].search("px")))-125)*1.44).toFixed(0);
+      $("#NUM_J4").text(i4[3] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+
+
+   $("#SLIDER_J5").children(".ui-slider-handle").click(function(){
+      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
+      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J5").text(i4[4] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#SLIDER_J5").children(".ui-slider-handle").keydown(function(){
+      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
+      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J5").text(i4[4] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
+   });
+   $("#CARD_J5").click(function(){
+      i1[4] = $("#SLIDER_J5").children(".ui-slider-handle").css("bottom");
+      i4[4] = ((Number(i1[4].slice(0, i1[4].search("px")))-125)*0.72).toFixed(0);
+      $("#NUM_J5").text(i4[4] + "°");
+      $.getJSON('./update.php',{phpj1: i4[0],phpj2: i4[1],phpj3: i4[2],phpj4: i4[3],phpj5: i4[4]});
    });
 
 });
